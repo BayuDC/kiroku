@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { NuxtLink } from '#components';
+
+const auth = useAuthStore();
+
 const links = {
   operationl: [
     { name: 'Peminjaman', icon: 'fa-hand-holding-heart', href: '#' },
@@ -169,7 +173,18 @@ const activeLink = ref('Home');
             </li>
           </ul>
 
-          <hr class="my-4 md:min-w-full" />
+          <hr class="my-4 md:min-w-full mt-auto" />
+          <div class="text-blueGray-700 font-bold text-sm opacity-40">Login sebagai</div>
+          <div class="text-blueGray-700 font-bold">
+            {{ auth!.user.name }}
+            <span class="text-blueGray-700 font-medium opacity-80">[{{ auth!.user.role }}]</span>
+          </div>
+          <div class="py-3">
+            <NuxtLink to="/logout" class="text-xs uppercase font-bold text-blueGray-700 hover:text-red-500">
+              <i class="fas fa-sign-out-alt mr-2 text-sm opacity-75 w-3"></i>
+              Logout
+            </NuxtLink>
+          </div>
         </div>
       </div>
     </nav>

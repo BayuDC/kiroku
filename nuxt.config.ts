@@ -28,4 +28,7 @@ export default defineNuxtConfig({
       apiUrl: process.env.API_URL || 'http://localhost:8000/api',
     },
   },
+  routeRules: {
+    '/**': { ssr: false },
+  },
 });
