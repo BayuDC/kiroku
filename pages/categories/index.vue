@@ -11,6 +11,7 @@ const { data, refresh } = await useApi<any[]>('/categories', {
 <template>
   <div class="px-4 md:px-10 mx-auto w-full -m-24">
     <div class="flex flex-wrap">
+      <Alert2 />
       <div class="w-full">
         <Table :columns="['Nama']" :path="`/categories/new`">
           <TableRow v-for="c in data" :key="c.id" :path="`/categories/${c.id}`">
