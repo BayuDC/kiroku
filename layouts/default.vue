@@ -10,7 +10,7 @@ const links = {
   ],
   management: [
     { name: 'Pengguna', icon: 'fa-user', href: '#' },
-    { name: 'Kategori', icon: 'fa-tags', href: '#' },
+    { name: 'Kategori', icon: 'fa-tags', href: '/categories' },
     { name: 'Alat', icon: 'fa-hammer', href: '#' },
     { name: 'Barang', icon: 'fa-cube', href: '#' },
   ],
