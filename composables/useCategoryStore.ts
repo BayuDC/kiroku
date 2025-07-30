@@ -51,11 +51,19 @@ export const useCategoryStore = defineStore('category', () => {
     return true;
   }
 
+  async function destroy(): Promise<boolean> {
+    const err = await useApiDelete(`/categories/${id.value}`);
+    if (err) {
+      return false;
+    }
+    return true;
+  }
+
   function reset() {
     id.value = 0;
     data.value.name = '';
     error.value.name = '';
   }
 
-  return { id, data, error, load, create, update, reset };
+  return { id, data, error, load, create, update, delete: destroy, reset };
 });
