@@ -1,9 +1,15 @@
 <script setup lang="ts">
+import { useRouteQuery } from '@vueuse/router';
+
 definePageMeta({
   middleware: ['auth'],
 });
 
+const searchQUery = useRouteQuery('search');
+const search = ref('');
+
 const { data, refresh } = await useApi<any[]>('/categories', {
+  query: { search },
   default: () => [],
 });
 
@@ -18,6 +24,14 @@ async function onFailed() {
   setAlert('Gagal menghapus kategori', 'error');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+watchThrottled(
+  searchQUery,
+  async () => {
+    search.value = (searchQUery.value as string) || '';
+  },
+  { throttle: 1000 }
+);
 </script>
 
 <template>
