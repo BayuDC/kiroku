@@ -3,11 +3,15 @@ definePageMeta({
   middleware: ['auth'],
 });
 
+const route = useRoute();
+const id = route.params.id as string;
+
 const category = useCategoryStore();
+await category.load(parseInt(id));
 
 async function onSave() {
-  if (await category.create()) {
-    setAlert('Kategori berhasil ditambahkan', 'success');
+  if (await category.update()) {
+    setAlert('Kategori berhasil diperbarui', 'success');
     await navigateTo('/categories');
   }
 }

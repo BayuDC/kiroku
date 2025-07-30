@@ -135,8 +135,8 @@ const activeLink = ref('Home');
 
           <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
             <li class="items-center" v-for="link in links.operationl" :key="link.name">
-              <a
-                :href="link.href"
+              <NuxtLink
+                :to="link.href"
                 class="text-xs uppercase py-3 font-bold block"
                 :class="[
                   link.name === activeLink
@@ -146,7 +146,7 @@ const activeLink = ref('Home');
               >
                 <i :class="['fas', link.icon, 'mr-2', 'text-sm', 'opacity-75', 'w-3']"></i>
                 {{ link.name }}
-              </a>
+              </NuxtLink>
             </li>
           </ul>
 
@@ -158,8 +158,8 @@ const activeLink = ref('Home');
 
           <ul class="md:flex-col md:min-w-full flex flex-col list-none">
             <li class="items-center" v-for="link in links.management" :key="link.name">
-              <a
-                :href="link.href"
+              <NuxtLink
+                :to="link.href"
                 class="text-xs uppercase py-3 font-bold block"
                 :class="[
                   link.name === activeLink
@@ -169,7 +169,7 @@ const activeLink = ref('Home');
               >
                 <i :class="['fas', link.icon, 'mr-2', 'text-sm', 'opacity-75', 'w-3']"></i>
                 {{ link.name }}
-              </a>
+              </NuxtLink>
             </li>
           </ul>
 
