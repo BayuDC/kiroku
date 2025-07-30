@@ -12,7 +12,7 @@ const links = {
     { name: 'Pengguna', icon: 'fa-user', href: '/users' },
     { name: 'Kategori', icon: 'fa-tags', href: '/categories' },
     { name: 'Alat', icon: 'fa-hammer', href: '#' },
-    { name: 'Barang', icon: 'fa-cube', href: '#' },
+    { name: 'Barang', icon: 'fa-cube', href: '/consumables' },
   ],
 };
 
