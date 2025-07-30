@@ -11,7 +11,7 @@ const links = {
   management: [
     { name: 'Pengguna', icon: 'fa-user', href: '/users' },
     { name: 'Kategori', icon: 'fa-tags', href: '/categories' },
-    { name: 'Alat', icon: 'fa-hammer', href: '#' },
+    { name: 'Alat', icon: 'fa-hammer', href: '/tools' },
     { name: 'Barang', icon: 'fa-cube', href: '/consumables' },
   ],
 };

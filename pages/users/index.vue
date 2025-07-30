@@ -44,7 +44,10 @@ watchThrottled(
             <TableCell class="font-bold">{{ u.id }}</TableCell>
             <TableCell>{{ u.name }}</TableCell>
             <TableCell>{{ u.username }}</TableCell>
-            <TableCell>{{ u.role }}</TableCell>
+            <TableCell>
+              <span v-if="u.role === 'admin'">Admin</span>
+              <span v-else-if="u.role === 'staff'">Petugas</span>
+            </TableCell>
           </TableRow>
         </Table>
       </div>

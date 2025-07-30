@@ -44,7 +44,11 @@ watchThrottled(
             <TableCell class="font-bold">{{ c.id }}</TableCell>
             <TableCell>{{ c.name }}</TableCell>
             <TableCell>{{ c.stock }}</TableCell>
-            <TableCell>{{ c.description }}</TableCell>
+            <TableCell>
+              <div class="max-w-64 truncate">
+                {{ c.description }}
+              </div>
+            </TableCell>
             <TableCell>{{ c.category?.name || '-' }}</TableCell>
           </TableRow>
         </Table>

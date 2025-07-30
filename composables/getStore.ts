@@ -1,4 +1,4 @@
-export default function useGetStore(store: 'category' | 'user' | 'consumable' | string) {
+export default function useGetStore(store: 'category' | 'user' | 'consumable' | 'tool' | string) {
   switch (store) {
     case 'category':
       return useCategoryStore();
@@ -6,6 +6,8 @@ export default function useGetStore(store: 'category' | 'user' | 'consumable' | 
       return useUserStore();
     case 'consumable':
       return useConsumableStore();
+    case 'tool':
+      return useToolStore();
     default:
       throw new Error('Invalid store type');
   }
