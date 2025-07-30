@@ -176,8 +176,8 @@ const activeLink = ref('Home');
           <hr class="my-4 md:min-w-full mt-auto" />
           <div class="text-blueGray-700 font-bold text-sm opacity-40">Login sebagai</div>
           <div class="text-blueGray-700 font-bold">
-            {{ auth!.user.name }}
-            <span class="text-blueGray-700 font-medium opacity-80">[{{ auth!.user.role }}]</span>
+            {{ auth?.user?.name }}
+            <span class="text-blueGray-700 font-medium opacity-80">[{{ auth?.user?.role }}]</span>
           </div>
           <div class="py-3">
             <NuxtLink to="/logout" class="text-xs uppercase font-bold text-blueGray-700 hover:text-red-500">
