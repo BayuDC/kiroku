@@ -2,6 +2,7 @@
 definePageMeta({
   middleware: ['auth'],
 });
+setTitle('Tambah Pemakaian');
 
 const usage = useUsageStore();
 

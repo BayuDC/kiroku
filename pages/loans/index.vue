@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useRouteQuery } from '@vueuse/router';
 
+setTitle('Daftar Peminjaman');
+
 definePageMeta({
   middleware: ['auth'],
 });

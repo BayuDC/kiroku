@@ -1,7 +1,8 @@
 <script setup lang="ts">
 definePageMeta({
-  middleware: ['auth'],
+  middleware: ['auth', 'gate-admin'],
 });
+setTitle('Tambah User');
 
 const user = useUserStore();
 

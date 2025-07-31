@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useRouteQuery } from '@vueuse/router';
 
+setTitle('Daftar Kategori');
 definePageMeta({
   middleware: ['auth'],
 });
 
-const searchQUery = useRouteQuery('search');
+const searchQuery = useRouteQuery('search');
 const search = ref('');
 
 const { data, refresh } = await useApi<any[]>('/categories', {
@@ -26,9 +27,9 @@ async function onFailed() {
 }
 
 watchThrottled(
-  searchQUery,
+  searchQuery,
   async () => {
-    search.value = (searchQUery.value as string) || '';
+    search.value = (searchQuery.value as string) || '';
   },
   { throttle: 1000 }
 );

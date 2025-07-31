@@ -2,6 +2,7 @@
 definePageMeta({
   middleware: ['auth'],
 });
+setTitle('Edit Alat');
 
 const route = useRoute();
 const id = route.params.id as string;

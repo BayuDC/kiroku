@@ -1,6 +1,7 @@
 <script setup lang="ts">
+setTitle('Edit Pengguna');
 definePageMeta({
-  middleware: ['auth'],
+  middleware: ['auth', 'gate-admin'],
 });
 
 const route = useRoute();

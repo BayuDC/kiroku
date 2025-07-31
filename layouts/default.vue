@@ -9,7 +9,7 @@ const links = {
     { name: 'Pemakaian', icon: 'fa-fire', href: '/usages' },
   ],
   management: [
-    { name: 'Pengguna', icon: 'fa-user', href: '/users' },
+    { name: 'Pengguna', icon: 'fa-user', href: '/users', adminOnly: true },
     { name: 'Kategori', icon: 'fa-tags', href: '/categories' },
     { name: 'Alat', icon: 'fa-hammer', href: '/tools' },
     { name: 'Barang', icon: 'fa-cube', href: '/consumables' },
@@ -17,6 +17,8 @@ const links = {
 };
 
 const activeLink = ref('Home');
+
+const title = useTitleStore();
 </script>
 
 <template>
@@ -158,18 +160,20 @@ const activeLink = ref('Home');
 
           <ul class="md:flex-col md:min-w-full flex flex-col list-none">
             <li class="items-center" v-for="link in links.management" :key="link.name">
-              <NuxtLink
-                :to="link.href"
-                class="text-xs uppercase py-3 font-bold block"
-                :class="[
-                  link.name === activeLink
-                    ? 'text-pink-500 hover:text-pink-600'
-                    : 'text-blueGray-700 hover:text-blueGray-500',
-                ]"
-              >
-                <i :class="['fas', link.icon, 'mr-2', 'text-sm', 'opacity-75', 'w-3']"></i>
-                {{ link.name }}
-              </NuxtLink>
+              <template v-if="!link.adminOnly || (link.adminOnly && auth?.user?.role === 'admin')">
+                <NuxtLink
+                  :to="link.href"
+                  class="text-xs uppercase py-3 font-bold block"
+                  :class="[
+                    link.name === activeLink
+                      ? 'text-pink-500 hover:text-pink-600'
+                      : 'text-blueGray-700 hover:text-blueGray-500',
+                  ]"
+                >
+                  <i :class="['fas', link.icon, 'mr-2', 'text-sm', 'opacity-75', 'w-3']"></i>
+                  {{ link.name }}
+                </NuxtLink>
+              </template>
             </li>
           </ul>
 
@@ -193,7 +197,9 @@ const activeLink = ref('Home');
       <div class="relative bg-pink-600 md:!pt-8 pb-32 pt-12">
         <div class="px-4 md:px-10 mx-auto w-full">
           <div class="px-4">
-            <a class="text-white uppercase hidden lg:inline-block font-semibold" href="./index.html">Dashboard</a>
+            <a class="text-white uppercase hidden lg:inline-block font-semibold" href="./index.html">{{
+              title.text
+            }}</a>
           </div>
         </div>
       </div>

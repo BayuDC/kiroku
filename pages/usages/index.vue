@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useRouteQuery } from '@vueuse/router';
 
+setTitle('Daftar Pemakaian');
+
 definePageMeta({
   middleware: ['auth'],
 });

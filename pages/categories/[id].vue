@@ -1,4 +1,5 @@
 <script setup lang="ts">
+setTitle('Edit Kategori');
 definePageMeta({
   middleware: ['auth'],
 });

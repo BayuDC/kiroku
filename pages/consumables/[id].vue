@@ -1,4 +1,5 @@
 <script setup lang="ts">
+setTitle('Edit Barang');
 definePageMeta({
   middleware: ['auth'],
 });

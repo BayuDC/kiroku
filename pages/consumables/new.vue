@@ -1,4 +1,5 @@
 <script setup lang="ts">
+setTitle('Tambah Barang');
 definePageMeta({
   middleware: ['auth'],
 });

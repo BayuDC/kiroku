@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouteQuery } from '@vueuse/router';
 
+setTitle('Daftar Barang');
 definePageMeta({
   middleware: ['auth'],
 });

@@ -2,6 +2,7 @@
 definePageMeta({
   middleware: ['auth'],
 });
+setTitle('Tambah Peminjaman');
 
 const loan = useLoanStore();
 

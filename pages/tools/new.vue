@@ -2,6 +2,7 @@
 definePageMeta({
   middleware: ['auth'],
 });
+setTitle('Tambah Alat');
 
 const tool = useToolStore();
 

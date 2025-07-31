@@ -2,6 +2,7 @@
 definePageMeta({
   middleware: ['auth'],
 });
+setTitle('Detail Pemakaian');
 
 const route = useRoute();
 const id = route.params.id as string;
