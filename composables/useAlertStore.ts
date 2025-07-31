@@ -15,5 +15,5 @@ export const setAlert = (msg: string, type: 'success' | 'error') => {
 
   setTimeout(() => {
     store.message = null;
-  }, 3000);
+  }, 5000);
 };

@@ -1,0 +1,101 @@
+<script setup lang="ts">
+defineEmits<{
+  (e: 'save'): void;
+}>();
+
+const usage = useUsageStore();
+
+const search = ref('');
+const searchThrottled = ref('');
+
+const { data } = await useApi<{ id: number; name: string; stock: number }[]>(`/consumables`, {
+  key: 'consumables',
+  default: () => [],
+  query: { search: searchThrottled, limit: 3 },
+});
+
+watchThrottled(
+  search,
+  async () => {
+    if (search.value.length < 3) {
+      searchThrottled.value = '';
+      return;
+    }
+
+    searchThrottled.value = search.value;
+  },
+  { throttle: 1000 }
+);
+
+function addItem(id: number, name: string, quantity: number, stock: number) {
+  const existingItem = usage.data.consumables.find(item => item.id === id);
+
+  if (existingItem) {
+    existingItem.quantity += quantity;
+  } else {
+    usage.data.consumables.push({ id, name, quantity, stock });
+  }
+}
+</script>
+
+<template>
+  <Form path="/usages" @save="$emit('save')">
+    <div class="w-full">
+      <Input v-model="usage.data.used_by" label="Pemakai" :error="usage.error.used_by" />
+    </div>
+    <div class="w-full">
+      <div class="relative w-full mb-3">
+        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">Barang</label>
+
+        <div v-if="usage.data.consumables.length" class="mb-2">
+          <ul class="flex flex-col gap-3 mb-4">
+            <li class="flex gap-1" v-for="(item, index) in usage.data.consumables" :key="index">
+              <div
+                class="border-0 px-2 py-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+              >
+                {{ item.name }} (Stok: {{ item.stock }})
+              </div>
+              <input
+                class="w-20 text-center border-0 px-2 py-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline"
+                v-model.number="item.quantity"
+                type="number"
+                :min="1"
+                :max="item.stock"
+              />
+            </li>
+          </ul>
+        </div>
+
+        <input
+          type="text"
+          placeholder="Cari barang..."
+          class="border-0 px-2 py-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+          v-model="search"
+        />
+        <label
+          v-if="usage.error.consumables"
+          class="block text-blueGray-600 text-xs font-medium mb-2 mt-1 text-red-500"
+          htmlfor="grid-password"
+        >
+          {{ usage.error.consumables }}
+        </label>
+        <div v-if="searchThrottled" class="mt-2">
+          <div v-if="data.length" v-for="c in data" class="flex items-center py-1 gap-2">
+            <button
+              class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
+              type="button"
+              @click="addItem(c.id, c.name, 1, c.stock)"
+            >
+              Tambah
+            </button>
+            <span class="text-sm font-bold text-gray-500">{{ c.name }}</span>
+            <span class="text-gray-500">({{ c.stock }})</span>
+          </div>
+          <div v-else>Tidak ada barang ditemukan</div>
+        </div>
+      </div>
+    </div>
+  </Form>
+</template>
+
+<style scoped></style>

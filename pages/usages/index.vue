@@ -55,7 +55,7 @@ function formatDate(dateString: string) {
             <TableCell class="font-bold">{{ usage.id }}</TableCell>
             <TableCell>{{ usage.used_by }}</TableCell>
             <TableCell>{{ usage.staff.name }}</TableCell>
-            <TableCell>{{ usage.consumables_count }}</TableCell>
+            <TableCell>{{ usage.consumables_count }} barang</TableCell>
             <TableCell>{{ formatDate(usage.date) }}</TableCell>
           </TableRow>
         </Table>
