@@ -47,6 +47,17 @@ function addItem(id: number, name: string, condition: string) {
 function removeItem(index: number) {
   loan.data.tools.splice(index, 1);
 }
+
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('id-ID', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
 </script>
 
 <template>
@@ -78,6 +89,7 @@ function removeItem(index: number) {
                 v-else
                 class="w-28 border-0 px-2 py-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline"
                 v-model="item.condition_after"
+                :disabled="freeze"
               >
                 <option value="good">Baik</option>
                 <option value="broken">Rusak</option>
@@ -140,6 +152,21 @@ function removeItem(index: number) {
       </div>
     </div>
 
+    <template v-if="freeze">
+      <div class="w-full">
+        <Input :model-value="formatDate(loan.data.loan_date)" label="Tanggal Pinjam" :disabled="freeze" />
+      </div>
+      <div class="w-full">
+        <Input
+          :model-value="loan.data.return_date ? formatDate(loan.data.return_date) : '-'"
+          label="Tanggal Kembali"
+          :disabled="freeze"
+        />
+      </div>
+      <div class="w-full">
+        <Input :model-value="loan.data.staff" label="Petugas" :disabled="freeze" />
+      </div>
+    </template>
     <div class="mt-4 flex gap-2 w-full" v-if="freeze">
       <NuxtLink
         to="/loans"

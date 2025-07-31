@@ -34,6 +34,7 @@ export const useLoanStore = defineStore('loan', () => {
     tools: [] as { id: number; name: string; condition_before: string; condition_after: string }[],
     loan_date: '',
     return_date: null as string | null,
+    staff: '',
   });
   const error = ref({
     used_by: '',
@@ -56,6 +57,7 @@ export const useLoanStore = defineStore('loan', () => {
       }));
       data.value.loan_date = result.data.value?.loan_date;
       data.value.return_date = result.data.value?.return_date;
+      data.value.staff = result.data.value?.staff?.name || '';
       return;
     }
 

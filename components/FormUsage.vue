@@ -44,6 +44,17 @@ function addItem(id: number, name: string, quantity: number, stock: number) {
 function removeItem(index: number) {
   usage.data.consumables.splice(index, 1);
 }
+
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('id-ID', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
 </script>
 
 <template>
@@ -115,6 +126,14 @@ function removeItem(index: number) {
       </div>
     </div>
 
+    <template v-if="freeze">
+      <div class="w-full">
+        <Input :model-value="formatDate(usage.data.date)" label="Tanggal" :disabled="freeze" />
+      </div>
+      <div class="w-full">
+        <Input :model-value="usage.data.staff" label="Petugas" :disabled="freeze" />
+      </div>
+    </template>
     <div class="mt-4 flex gap-2" v-if="freeze">
       <NuxtLink
         to="/usages"

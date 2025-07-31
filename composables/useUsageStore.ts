@@ -26,6 +26,8 @@ export const useUsageStore = defineStore('usage', () => {
   const data = ref({
     used_by: '',
     consumables: [] as { id: number; name: string; quantity: number; stock: number }[],
+    date: '',
+    staff: '',
   });
   const error = ref({
     used_by: '',
@@ -45,6 +47,9 @@ export const useUsageStore = defineStore('usage', () => {
       data.value.consumables.forEach(item => {
         item.quantity = item.pivot.quantity; // Ensure quantity is defined
       });
+
+      data.value.date = result.data.value?.date;
+      data.value.staff = result.data.value?.staff.name || '';
       return;
     }
 
