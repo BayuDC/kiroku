@@ -64,7 +64,7 @@ function removeItem(index: number) {
               <div
                 class="border-0 px-2 py-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
               >
-                {{ item.name }} (Kondisi: {{ item.condition_before }})
+                {{ item.name }} (Kondisi: {{ item.condition_before === 'good' ? 'Baik' : 'Rusak' }})
               </div>
               <button
                 v-if="!freeze"
@@ -74,6 +74,14 @@ function removeItem(index: number) {
               >
                 Hapus
               </button>
+              <select
+                v-else
+                class="w-28 border-0 px-2 py-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline"
+                v-model="item.condition_after"
+              >
+                <option value="good">Baik</option>
+                <option value="broken">Rusak</option>
+              </select>
             </li>
           </ul>
         </div>
@@ -132,7 +140,7 @@ function removeItem(index: number) {
       </div>
     </div>
 
-    <div class="mt-4 flex gap-2" v-if="freeze">
+    <div class="mt-4 flex gap-2 w-full" v-if="freeze">
       <NuxtLink
         to="/loans"
         class="bg-gray-500 text-white active:bg-blueGray-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -140,6 +148,14 @@ function removeItem(index: number) {
       >
         Kembali
       </NuxtLink>
+
+      <button
+        v-if="!loan.data.return_date"
+        class="ml-auto bg-amber-500 text-white active:bg-amber-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        type="submit"
+      >
+        Dikembalikan
+      </button>
     </div>
   </Form>
 </template>

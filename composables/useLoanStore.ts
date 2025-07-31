@@ -32,6 +32,8 @@ export const useLoanStore = defineStore('loan', () => {
   const data = ref({
     used_by: '',
     tools: [] as { id: number; name: string; condition_before: string; condition_after: string }[],
+    loan_date: '',
+    return_date: null as string | null,
   });
   const error = ref({
     used_by: '',
@@ -50,8 +52,10 @@ export const useLoanStore = defineStore('loan', () => {
         id: tool.id,
         name: tool.name,
         condition_before: tool.pivot.condition_before,
-        condition_after: tool.pivot.condition_after,
+        condition_after: tool.pivot.condition_after || tool.pivot.condition_before,
       }));
+      data.value.loan_date = result.data.value?.loan_date;
+      data.value.return_date = result.data.value?.return_date;
       return;
     }
 
@@ -83,13 +87,28 @@ export const useLoanStore = defineStore('loan', () => {
     return true;
   }
 
+  async function update(): Promise<boolean> {
+    const err = await useApiUpdate(`/loans/${id.value}`, toValue(data));
+    if (err) {
+      error.value.used_by = err.used_by?.[0] || '';
+      error.value.tools = err.tools?.[0] || '';
+      return false;
+    }
+
+    error.value.used_by = '';
+    error.value.tools = '';
+    return true;
+  }
+
   function reset() {
     id.value = 0;
     data.value.used_by = '';
     data.value.tools = [];
+    data.value.loan_date = '';
+    data.value.return_date = null;
     error.value.used_by = '';
     error.value.tools = '';
   }
 
-  return { id, data, error, load, create, delete: destroy, reset };
+  return { id, data, error, load, create, update, delete: destroy, reset };
 });
