@@ -51,7 +51,7 @@ function formatDate(dateString: string) {
       <Alert2 />
       <div class="w-full">
         <Table :columns="['Pemakai', 'Petugas', 'Jumlah', 'Waktu']" :path="`/usages/new`">
-          <TableRow v-for="usage in data" :key="usage.id" :path="`/usages/${usage.id}`">
+          <TableRow v-for="usage in data" :key="usage.id" :path="`/usages/${usage.id}`" btn1="Detail">
             <TableCell class="font-bold">{{ usage.id }}</TableCell>
             <TableCell>{{ usage.used_by }}</TableCell>
             <TableCell>{{ usage.staff.name }}</TableCell>

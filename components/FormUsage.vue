@@ -1,4 +1,8 @@
 <script setup lang="ts">
+defineProps<{
+  freeze?: boolean;
+}>();
+
 defineEmits<{
   (e: 'save'): void;
 }>();
@@ -39,9 +43,9 @@ function addItem(id: number, name: string, quantity: number, stock: number) {
 </script>
 
 <template>
-  <Form path="/usages" @save="$emit('save')">
+  <Form path="/usages" @save="$emit('save')" :freeze="freeze">
     <div class="w-full">
-      <Input v-model="usage.data.used_by" label="Pemakai" :error="usage.error.used_by" />
+      <Input v-model="usage.data.used_by" label="Pemakai" :error="usage.error.used_by" :disabled="freeze" />
     </div>
     <div class="w-full">
       <div class="relative w-full mb-3">
@@ -61,39 +65,52 @@ function addItem(id: number, name: string, quantity: number, stock: number) {
                 type="number"
                 :min="1"
                 :max="item.stock"
+                :disabled="freeze"
               />
             </li>
           </ul>
         </div>
 
-        <input
-          type="text"
-          placeholder="Cari barang..."
-          class="border-0 px-2 py-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-          v-model="search"
-        />
-        <label
-          v-if="usage.error.consumables"
-          class="block text-blueGray-600 text-xs font-medium mb-2 mt-1 text-red-500"
-          htmlfor="grid-password"
-        >
-          {{ usage.error.consumables }}
-        </label>
-        <div v-if="searchThrottled" class="mt-2">
-          <div v-if="data.length" v-for="c in data" class="flex items-center py-1 gap-2">
-            <button
-              class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
-              type="button"
-              @click="addItem(c.id, c.name, 1, c.stock)"
-            >
-              Tambah
-            </button>
-            <span class="text-sm font-bold text-gray-500">{{ c.name }}</span>
-            <span class="text-gray-500">({{ c.stock }})</span>
+        <template v-if="!freeze">
+          <input
+            type="text"
+            placeholder="Cari barang..."
+            class="border-0 px-2 py-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+            v-model="search"
+          />
+          <label
+            v-if="usage.error.consumables"
+            class="block text-blueGray-600 text-xs font-medium mb-2 mt-1 text-red-500"
+            htmlfor="grid-password"
+          >
+            {{ usage.error.consumables }}
+          </label>
+          <div v-if="searchThrottled" class="mt-2">
+            <div v-if="data.length" v-for="c in data" class="flex items-center py-1 gap-2">
+              <button
+                class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
+                type="button"
+                @click="addItem(c.id, c.name, 1, c.stock)"
+              >
+                Tambah
+              </button>
+              <span class="text-sm font-bold text-gray-500">{{ c.name }}</span>
+              <span class="text-gray-500">({{ c.stock }})</span>
+            </div>
+            <div v-else>Tidak ada barang ditemukan</div>
           </div>
-          <div v-else>Tidak ada barang ditemukan</div>
-        </div>
+        </template>
       </div>
+    </div>
+
+    <div class="mt-4 flex gap-2" v-if="freeze">
+      <NuxtLink
+        to="/usages"
+        class="bg-gray-500 text-white active:bg-blueGray-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        type="button"
+      >
+        Kembali
+      </NuxtLink>
     </div>
   </Form>
 </template>

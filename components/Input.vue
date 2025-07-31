@@ -4,6 +4,7 @@ withDefaults(
     type?: string;
     label?: string;
     error?: string;
+    disabled?: boolean;
   }>(),
   {
     type: 'text',
@@ -23,6 +24,7 @@ const value = defineModel();
       :type="type"
       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
       :class="[error ? 'bg-red-100' : 'bg-white']"
+      :disabled="disabled"
     />
     <label
       v-if="error"

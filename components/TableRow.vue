@@ -1,6 +1,8 @@
 <script setup lang="ts">
 defineProps<{
   path: string;
+  btn1?: string;
+  btn2?: string;
 }>();
 
 defineEmits<{
@@ -17,14 +19,14 @@ defineEmits<{
         class="bg-emerald-500 text-white active:bg-emerald-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
       >
-        Edit
+        {{ btn1 || 'Edit' }}
       </NuxtLink>
       <button
         class="bg-red-500 text-white active:bg-red-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
         @click="$emit('delete')"
       >
-        Hapus
+        {{ btn2 || 'Hapus' }}
       </button>
     </td>
   </tr>

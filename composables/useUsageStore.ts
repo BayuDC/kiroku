@@ -10,6 +10,14 @@ interface Usage {
     username: string;
     role: string;
   };
+  consumables: {
+    id: number;
+    name: string;
+    stock: number;
+    pivot: {
+      quantity: number; // Ensure quantity is defined
+    };
+  }[];
 }
 
 export const useUsageStore = defineStore('usage', () => {
@@ -32,6 +40,11 @@ export const useUsageStore = defineStore('usage', () => {
 
     if (result.data.value) {
       data.value.used_by = result.data.value?.used_by;
+      data.value.consumables = result.data.value?.consumables || [];
+
+      data.value.consumables.forEach(item => {
+        item.quantity = item.pivot.quantity; // Ensure quantity is defined
+      });
       return;
     }
 
