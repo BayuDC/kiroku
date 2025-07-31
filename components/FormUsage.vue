@@ -40,6 +40,10 @@ function addItem(id: number, name: string, quantity: number, stock: number) {
     usage.data.consumables.push({ id, name, quantity, stock });
   }
 }
+
+function removeItem(index: number) {
+  usage.data.consumables.splice(index, 1);
+}
 </script>
 
 <template>
@@ -67,6 +71,14 @@ function addItem(id: number, name: string, quantity: number, stock: number) {
                 :max="item.stock"
                 :disabled="freeze"
               />
+              <button
+                v-if="!freeze"
+                class="bg-red-500 text-white active:bg-red-600 text-xs font-bold uppercase px-2 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
+                type="button"
+                @click="removeItem(index)"
+              >
+                Hapus
+              </button>
             </li>
           </ul>
         </div>
@@ -95,7 +107,7 @@ function addItem(id: number, name: string, quantity: number, stock: number) {
                 Tambah
               </button>
               <span class="text-sm font-bold text-gray-500">{{ c.name }}</span>
-              <span class="text-gray-500">({{ c.stock }})</span>
+              <span class="text-sm px-2 py-1 rounded bg-blue-100 text-blue-600"> Stok: {{ c.stock }} </span>
             </div>
             <div v-else>Tidak ada barang ditemukan</div>
           </div>

@@ -69,6 +69,20 @@ export const useLoanStore = defineStore('loan', () => {
     return true;
   }
 
+  async function create(): Promise<boolean> {
+    const err = await useApiCreate('/loans', toValue(data));
+
+    if (err) {
+      error.value.used_by = err.used_by?.[0] || '';
+      error.value.tools = err.tools?.[0] || '';
+      return false;
+    }
+
+    error.value.used_by = '';
+    error.value.tools = '';
+    return true;
+  }
+
   function reset() {
     id.value = 0;
     data.value.used_by = '';
@@ -77,5 +91,5 @@ export const useLoanStore = defineStore('loan', () => {
     error.value.tools = '';
   }
 
-  return { id, data, error, load, delete: destroy, reset };
+  return { id, data, error, load, create, delete: destroy, reset };
 });
