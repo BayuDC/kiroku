@@ -5,7 +5,7 @@ const auth = useAuthStore();
 
 const links = {
   operationl: [
-    { name: 'Peminjaman', icon: 'fa-hand-holding-heart', href: '#' },
+    { name: 'Peminjaman', icon: 'fa-hand-holding-heart', href: '/loans' },
     { name: 'Pemakaian', icon: 'fa-fire', href: '/usages' },
   ],
   management: [

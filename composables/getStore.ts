@@ -10,6 +10,8 @@ export default function useGetStore(store: 'category' | 'user' | 'consumable' | 
       return useToolStore();
     case 'usage':
       return useUsageStore();
+    case 'loan':
+      return useLoanStore();
     default:
       throw new Error('Invalid store type');
   }
