@@ -51,7 +51,13 @@ function formatDate(dateString: string) {
       <Alert2 />
       <div class="w-full">
         <Table :columns="['Pemakai', 'Petugas', 'Jumlah', 'Waktu']" :path="`/usages/new`">
-          <TableRow v-for="usage in data" :key="usage.id" :path="`/usages/${usage.id}`" btn1="Detail">
+          <TableRow
+            v-for="usage in data"
+            :key="usage.id"
+            :path="`/usages/${usage.id}`"
+            btn1="Detail"
+            @delete="modal.select(usage.id, 'Pemakaian ' + usage.id + ' - ' + usage.used_by)"
+          >
             <TableCell class="font-bold">{{ usage.id }}</TableCell>
             <TableCell>{{ usage.used_by }}</TableCell>
             <TableCell>{{ usage.staff.name }}</TableCell>
@@ -60,7 +66,7 @@ function formatDate(dateString: string) {
           </TableRow>
         </Table>
       </div>
-      <!-- <Modal store="usage" ref="modal" @deleted="onDeleted" @failed="onFailed" /> -->
+      <Modal store="usage" ref="modal" @deleted="onDeleted" @failed="onFailed" />
     </div>
   </div>
 </template>

@@ -8,6 +8,8 @@ export default function useGetStore(store: 'category' | 'user' | 'consumable' | 
       return useConsumableStore();
     case 'tool':
       return useToolStore();
+    case 'usage':
+      return useUsageStore();
     default:
       throw new Error('Invalid store type');
   }
