@@ -32,7 +32,8 @@ async function onSave() {
         <Alert2 />
       </div>
       <div class="w-full">
-        <FormLoan freeze @save="onSave" />
+        <FormLoan freeze :freeze2="!loan.data.return_date" @save="onSave" />
+        {{ loan.data }}
       </div>
     </div>
   </div>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   freeze?: boolean;
+  freeze2?: boolean;
 }>();
 
 defineEmits<{
@@ -89,7 +90,7 @@ function formatDate(dateString: string) {
                 v-else
                 class="w-28 border-0 px-2 py-1 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline"
                 v-model="item.condition_after"
-                :disabled="freeze"
+                :disabled="!freeze2"
               >
                 <option value="good">Baik</option>
                 <option value="broken">Rusak</option>
