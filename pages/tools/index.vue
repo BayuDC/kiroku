@@ -110,7 +110,13 @@ function goToNext() {
       <Alert2 />
       <div class="w-full">
         <Table :columns="['Nama', 'Status', 'Kondisi', 'Deskripsi', 'Kategori']" :path="`/tools/new`">
-          <TableRow v-for="t in data.data" :key="t.id" :path="`/tools/${t.id}`" @delete="modal.select(t.id, t.name)">
+          <TableRow
+            btn1="Detail"
+            v-for="t in data.data"
+            :key="t.id"
+            :path="`/tools/${t.id}`"
+            @delete="modal.select(t.id, t.name)"
+          >
             <TableCell class="font-bold">{{ t.id }}</TableCell>
             <TableCell>{{ t.name }}</TableCell>
             <TableCell>

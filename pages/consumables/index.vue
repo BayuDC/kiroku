@@ -111,6 +111,7 @@ function goToNext() {
       <div class="w-full">
         <Table :columns="['Nama', 'Stok', 'Deskripsi', 'Kategori']" :path="`/consumables/new`">
           <TableRow
+            btn1="Detail"
             v-for="c in data.data"
             :key="c.id"
             :path="`/consumables/${c.id}`"

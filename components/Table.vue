@@ -9,16 +9,18 @@ defineProps<{
   <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
     <div class="rounded-t mb-0 px-4 py-3 border-0">
       <div class="flex flex-wrap items-center">
-        <Search />
-        <div class="relative w-full px-2 max-w-full flex-grow flex-1 text-right">
-          <NuxtLink
-            :to="path"
-            class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button"
-          >
-            Tambah
-          </NuxtLink>
-        </div>
+        <slot name="header">
+          <Search />
+          <div class="relative w-full px-2 max-w-full flex-grow flex-1 text-right">
+            <NuxtLink
+              :to="path"
+              class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+            >
+              Tambah
+            </NuxtLink>
+          </div>
+        </slot>
       </div>
     </div>
     <div class="block w-full overflow-x-auto">
